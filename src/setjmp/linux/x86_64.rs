@@ -1,11 +1,11 @@
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct jmp_buf {
     _data: [u64; 25]
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sigjmp_buf {
     _data: [u64; 25]
 }

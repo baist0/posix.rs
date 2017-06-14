@@ -1,5 +1,5 @@
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sched_param {
     pub sched_priority: ::int_t,
 }

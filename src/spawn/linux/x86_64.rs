@@ -1,5 +1,5 @@
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct posix_spawnattr_t {
     _data: [u64; 42],
 }
@@ -7,7 +7,7 @@ pub struct posix_spawnattr_t {
 new!(posix_spawnattr_t);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct posix_spawn_file_actions_t {
     _data: [u64; 10],
 }

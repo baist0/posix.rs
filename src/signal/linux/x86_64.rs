@@ -1,30 +1,30 @@
 pub type sig_atomic_t = ::int_t;
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sigset_t {
-    _data: [::ulong_t; 16usize],
+    _data: [::ulong_t; 16],
 }
 
 new!(sigset_t);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sigevent {
     pub sigev_value: sigval,
     pub sigev_signo: ::int_t,
     pub sigev_notify: ::int_t,
     pub sigev_notify_function: ::std::option::Option<extern fn(arg1: sigval)>,
     pub sigev_notify_attribute: *mut ::sys::types::pthread_attr_t,
-    _pad: [u64; 4usize],
+    _pad: [u64; 4],
 }
 
 new!(sigevent);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sigval {
-    _data: [u64; 1usize],
+    _data: [u64; 1],
 }
 
 new!(sigval);
@@ -48,7 +48,7 @@ impl sigval {
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct sigaction {
     hlr: [u64; 1usize],
     pub sa_mask: sigset_t,
@@ -80,7 +80,7 @@ impl sigaction {
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct mcontext_t {
     _data: [u64; 32],
 }
@@ -88,7 +88,7 @@ pub struct mcontext_t {
 new!(mcontext_t);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct ucontext {
     pub uc_flags: ::ulong_t,
     pub uc_link: *mut ucontext,
@@ -101,7 +101,7 @@ pub struct ucontext {
 new!(ucontext);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct stack_t {
     pub ss_sp: *mut ::void_t,
     pub ss_flags: ::int_t,
@@ -111,7 +111,7 @@ pub struct stack_t {
 new!(stack_t);
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct siginfo_t {
     pub si_signo: ::int_t,
     pub si_errno: ::int_t,
@@ -184,7 +184,7 @@ impl siginfo_t {
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 struct _rt {
     si_pid: ::sys::types::pid_t,
     si_uid: ::sys::types::uid_t,
@@ -192,7 +192,7 @@ struct _rt {
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 struct _sigchld {
     si_pid: ::sys::types::pid_t,
     si_uid: ::sys::types::uid_t,
@@ -200,14 +200,14 @@ struct _sigchld {
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 struct _sigfault {
     si_addr: *mut ::void_t,
     si_addr_lsb: ::short_t,
 }
 
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 struct _sigpoll {
     si_band: ::long_t,
 }
@@ -217,7 +217,7 @@ pub fn SIG_DFL() -> extern fn(::int_t) {
 }
 
 pub fn SIG_ERR() -> extern fn(::int_t) {
-    unsafe { ::std::mem::transmute::<usize,_>(-1) }
+    unsafe { ::std::mem::transmute::<usize,_>(usize::max_value()) }
 }
 
 pub fn SIG_IGN() -> extern fn(::int_t) {

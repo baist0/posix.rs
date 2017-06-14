@@ -1,12 +1,12 @@
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Copy, Clone)]
 pub struct utsname {
-    pub sysname: [::char_t; 65usize],
-    pub nodename: [::char_t; 65usize],
-    pub release: [::char_t; 65usize],
-    pub version: [::char_t; 65usize],
-    pub machine: [::char_t; 65usize],
-    __domainname: [::char_t; 65usize],
+    pub sysname: [::char_t; 65],
+    pub nodename: [::char_t; 65],
+    pub release: [::char_t; 65],
+    pub version: [::char_t; 65],
+    pub machine: [::char_t; 65],
+    __domainname: [::char_t; 65],
 }
 
 new!(utsname);
